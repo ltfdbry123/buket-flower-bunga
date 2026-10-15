@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Buket Bunga Lucu 🌸✨</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Quicksand', sans-serif; }
+        .theme-pink { background-color: #fff1f2; --main-color: #f43f5e; --accent-color: #fb7185; }
+        .theme-pastel { background-color: #f0fdf4; --main-color: #10b981; --accent-color: #34d399; }
+        .theme-purple { background-color: #faf5ff; --main-color: #a855f7; --accent-color: #c084fc; }
+        .theme-yellow { background-color: #fefce8; --main-color: #eab308; --accent-color: #facc15; }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+    </style>
+</head>
+<body class="theme-pink min-h-screen transition-all duration-500 flex flex-col justify-between">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50 py-4 px-6 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl">💐</span>
+            <h1 id="brand-title" class="text-xl font-bold text-rose-500">BuketLucu.id</h1>
+        </div>
+        
+        <!-- Pilihan Tema -->
+        <div class="flex gap-2 items-center">
+            <span class="text-xs font-semibold text-gray-500 hidden sm:inline">Pilih Tema:</span>
+            <button onclick="setTheme('pink', '#fff1f2', '#f43f5e', '#fb7185', 'text-rose-500')" class="w-7 h-7 rounded-full bg-rose-400 border-2 border-white shadow hover:scale-110 transition"></button>
+            <button onclick="setTheme('pastel', '#f0fdf4', '#10b981', '#34d399', 'text-emerald-500')" class="w-7 h-7 rounded-full bg-emerald-400 border-2 border-white shadow hover:scale-110 transition"></button>
+            <button onclick="setTheme('purple', '#faf5ff', '#a855f7', '#c084fc', 'text-purple-500')" class="w-7 h-7 rounded-full bg-purple-400 border-2 border-white shadow hover:scale-110 transition"></button>
+            <button onclick="setTheme('yellow', '#fefce8', '#eab308', '#facc15', 'text-yellow-500')" class="w-7 h-7 rounded-full bg-yellow-400 border-2 border-white shadow hover:scale-110 transition"></button>
+        </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-8 w-full items-start">
+        
+        <!-- Kolom Preview Buket -->
+        <div class="bg-white/90 backdrop-blur-sm p-6 rounded-3xl shadow-xl flex flex-col items-center text-center relative overflow-hidden border-2 border-white">
+            <div class="absolute top-3 left-4 text-xs font-bold px-3 py-1 bg-gray-100 rounded-full text-gray-600">Preview Live 🎀</div>
+            
+            <div class="my-8 relative floating w-64 h-80 flex flex-col items-center justify-center">
+                <!-- Wrapper & Pita -->
+                <div id="preview-wrapper" class="absolute bottom-0 w-48 h-48 bg-rose-200 rounded-b-full shadow-lg border-2 border-rose-300 flex items-start justify-center pt-2 transition-all duration-300">
+                    <span id="preview-ribbon" class="text-3xl filter drop-shadow">🎀</span>
+                </div>
+                <!-- Bunga-bunga -->
+                <div id="preview-flowers" class="absolute top-2 flex flex-wrap justify-center items-center w-56 gap-1 z-10 transition-all duration-300">
+                    <span class="text-5xl filter drop-shadow">🌷</span>
+                    <span class="text-5xl filter drop-shadow">🌹</span>
+                    <span class="text-5xl filter drop-shadow">🌻</span>
+                </div>
+                <!-- Tambahan Hiasan/Topper -->
+                <div id="preview-addon" class="absolute -top-4 right-6 text-3xl z-20 transition-all duration-300">
+                    🧸
+                </div>
+            </div>
+
+            <!-- Kartu Ucapan Preview -->
+            <div id="card-preview-box" class="w-full bg-rose-50 border border-rose-200 rounded-2xl p-4 text-sm text-gray-700 italic shadow-inner">
+                "<span id="preview-card-text">Happy Birthday! Semoga harimu seindah bunga ini ✨</span>"
+                <div class="text-xs font-bold text-rose-400 mt-1 not-italic">- <span id="preview-card-from">Kak Cantik</span></div>
+            </div>
+        </div>
+
+        <!-- Kolom Customizer (Form) -->
+        <div class="bg-white/90 backdrop-blur-sm p-6 sm:p-8 rounded-3xl shadow-xl border-2 border-white flex flex-col gap-6">
+            <h2 id="form-title" class="text-2xl font-bold text-rose-500">✨ Custom Buketmu Sendiri</h2>
+
+            <!-- 1. Pilih Bunga -->
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-2">1. Pilih Koleksi Bunga Utama:</label>
+                <div class="grid grid-cols-3 gap-3">
+                    <button onclick="selectFlower('🌷 🌹 🌻', 'Mixceria', this)" class="flower-btn border-2 border-rose-400 bg-rose-50 rounded-xl p-3 flex flex-col items-center justify-center gap-1 font-semibold text-sm transition hover:scale-105 active">
+                        <span class="text-2xl">🌷🌹🌻</span>
+                        <span>Mix Ceria</span>
+                    </button>
+                    <button onclick="selectFlower('🌷 🌷 🌷', 'Tulips', this)" class="flower-btn border-2 border-gray-200 bg-gray-50 rounded-xl p-3 flex flex-col items-center justify-center gap-1 font-semibold text-sm transition hover:scale-105">
+                        <span class="text-2xl">🌷🌷🌷</span>
+                        <span>Tulip Pink</span>
+                    </button>
+                    <button onclick="selectFlower('🌻 🌻 🌻', 'Sunflower', this)" class="flower-btn border-2 border-gray-200 bg-gray-50 rounded-xl p-3 flex flex-col items-center justify-center gap-1 font-semibold text-sm transition hover:scale-105">
+                        <span class="text-2xl">🌻🌻🌻</span>
+                        <span>Matahari</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. Pilih Warna Kertas Pembungkus -->
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-2">2. Warna Kertas Wrapper:</label>
+                <div class="grid grid-cols-4 gap-3">
+                    <button onclick="selectWrapper('bg-rose-200 border-rose-300', this)" class="wrap-btn border-4 border-rose-400 bg-rose-200 h-10 rounded-xl shadow-sm transition hover:scale-105"></button>
+                    <button onclick="selectWrapper('bg-sky-200 border-sky-300', this)" class="wrap-btn border-2 border-transparent bg-sky-200 h-10 rounded-xl shadow-sm transition hover:scale-105"></button>
+                    <button onclick="selectWrapper('bg-purple-200 border-purple-300', this)" class="wrap-btn border-2 border-transparent bg-purple-200 h-10 rounded-xl shadow-sm transition hover:scale-105"></button>
+                    <button onclick="selectWrapper('bg-amber-100 border-amber-200', this)" class="wrap-btn border-2 border-transparent bg-amber-100 h-10 rounded-xl shadow-sm transition hover:scale-105"></button>
+                </div>
+            </div>
+
+            <!-- 3. Pilih Tambahan Boneka/Topper -->
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-2">3. Tambahan Lucu:</label>
+                <div class="grid grid-cols-4 gap-3">
+                    <button onclick="selectAddon('🧸', this)" class="addon-btn border-2 border-rose-400 bg-rose-50 h-12 rounded-xl text-xl flex items-center justify-center transition hover:scale-105 active">🧸</button>
+                    <button onclick="selectAddon('👑', this)" class="addon-btn border-2 border-gray-200 bg-gray-50 h-12 rounded-xl text-xl flex items-center justify-center transition hover:scale-105">👑</button>
+                    <button onclick="selectAddon('🍫', this)" class="addon-btn border-2 border-gray-200 bg-gray-50 h-12 rounded-xl text-xl flex items-center justify-center transition hover:scale-105">🍫</button>
+                    <button onclick="selectAddon('⭐', this)" class="addon-btn border-2 border-gray-200 bg-gray-50 h-12 rounded-xl text-xl flex items-center justify-center transition hover:scale-105">⭐</button>
+                </div>
+            </div>
+
+            <!-- 4. Pesan Kartu Ucapan -->
+            <div class="flex flex-col gap-2">
+                <label class="block text-sm font-bold text-gray-700">4. Pesan Kartu Ucapan:</label>
+                <input type="text" id="input-card-from" placeholder="Pengirim (Contoh: Kak Ganteng)" oninput="updateCard()" class="w-full px-4 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 text-sm">
+                <textarea id="input-card-text" placeholder="Tulis ucapan manis di sini..." rows="2" oninput="updateCard()" class="w-full px-4 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 text-sm resize-none">Happy Birthday! Semoga harimu seindah bunga ini ✨</textarea>
+            </div>
+
+            <!-- Tombol Order -->
+            <button onclick="checkoutWhatsApp()" id="checkout-btn" class="w-full py-3.5 rounded-xl font-bold text-white shadow-lg transition hover:opacity-90 active:scale-95 text-center bg-rose-500">
+                Pesan Buket Ini via WhatsApp 💌
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 text-xs text-gray-400">
+        Made with 💖 for someone special.
+    </footer>
+
+    <!-- Script Interaktif -->
+    <script>
+        let currentData = {
+            flowerEmoji: "🌷 🌹 🌻",
+            flowerName: "Mixceria",
+            wrapperClass: "bg-rose-200 border-rose-300",
+            addonEmoji: "🧸",
+            fromText: "Kak Cantik",
+            messageText: "Happy Birthday! Semoga harimu seindah bunga ini ✨",
+            themeColorClass: "text-rose-500",
+            mainHex: "#f43f5e"
+        };
+
+        // Fungsi Ganti Tema Warna Website
+        function setTheme(themeName, bgColor, mainHex, accentHex, textColorClass) {
+            document.body.className = `theme-${themeName} min-h-screen transition-all duration-500 flex flex-col justify-between`;
+            
+            // Update warna teks utama & tombol
+            document.getElementById('brand-title').className = `text-xl font-bold ${textColorClass}`;
+            document.getElementById('form-title').className = `text-2xl font-bold ${textColorClass}`;
+            document.getElementById('checkout-btn').style.backgroundColor = mainHex;
+            document.getElementById('card-preview-box').className = `w-full bg-${themeName === 'pink' ? 'rose' : themeName === 'pastel' ? 'emerald' : themeName === 'purple' ? 'purple' : 'yellow'}-50 border border-${textColorClass.replace('text-', '')} rounded-2xl p-4 text-sm text-gray-700 italic shadow-inner`;
+            
+            currentData.themeColorClass = textColorClass;
+            currentData.mainHex = mainHex;
+        }
+
+        // Pilih Bunga
+        function selectFlower(emojiString, name, btnElement) {
+            currentData.flowerEmoji = emojiString;
+            currentData.flowerName = name;
+            
+            document.getElementById('preview-flowers').innerHTML = emojiString.split(' ').map(e => `<span class="text-5xl filter drop-shadow">${e}</span>`).join('');
+            
+            // Styling aktif button
+            document.querySelectorAll('.flower-btn').forEach(b => {
+                b.classList.remove('border-rose-400', 'bg-rose-50');
+                b.classList.add('border-gray-200', 'bg-gray-50');
+            });
+            btnElement.classList.remove('border-gray-200', 'bg-gray-50');
+            btnElement.classList.add('border-rose-400', 'bg-rose-50');
+        }
+
+        // Pilih Wrapper
+        function selectWrapper(wrapperClassString, btnElement) {
+            currentData.wrapperClass = wrapperClassString;
+            const wrapper = document.getElementById('preview-wrapper');
+            wrapper.className = `absolute bottom-0 w-48 h-48 rounded-b-full shadow-lg border-2 flex items-start justify-center pt-2 transition-all duration-300 ${wrapperClassString}`;
+            
+            document.querySelectorAll('.wrap-btn').forEach(b => {
+                b.classList.remove('border-4', 'border-rose-400');
+                b.classList.add('border-2', 'border-transparent');
+            });
+            btnElement.classList.remove('border-2', 'border-transparent');
+            btnElement.classList.add('border-4', 'border-rose-400');
+        }
+
+        // Pilih Addon
+        function selectAddon(emoji, btnElement) {
+            currentData.addonEmoji = emoji;
+            document.getElementById('preview-addon').innerText = emoji;
+
+            document.querySelectorAll('.addon-btn').forEach(b => {
+                b.classList.remove('border-rose-400', 'bg-rose-50');
+                b.classList.add('border-gray-200', 'bg-gray-50');
+            });
+            btnElement.classList.remove('border-gray-200', 'bg-gray-50');
+            btnElement.classList.add('border-rose-400', 'bg-rose-50');
+        }
+
+        // Update Kartu Ucapan Live
+        function updateCard() {
+            const from = document.getElementById('input-card-from').value;
+            const text = document.getElementById('input-card-text').value;
+            
+            currentData.fromText = from ? from : "Kak Cantik";
+            currentData.messageText = text ? text : "Tulis ucapan manis di sini...";
+
+            document.getElementById('preview-card-from').innerText = currentData.fromText;
+            document.getElementById('preview-card-text').innerText = currentData.messageText;
+        }
+
+        // Kirim Pesanan via WhatsApp
+        function checkoutWhatsApp() {
+            const phone = "6281234567890"; // Ganti dengan nomor WhatsApp Anda
+            const text = `Halo Kak, saya mau pesan custom buket bunga dong! 💐✨\n\n` +
+                         `- Jenis Bunga: ${currentData.flowerName} (${currentData.flowerEmoji})\n` +
+                         `- Tambahan: ${currentData.addonEmoji}\n` +
+                         `- Kartu Ucapan:\n  "${currentData.messageText}"\n  (Dari: ${currentData.fromText})\n\n` +
+                         `Mohon diproses ya kak! Terima kasih 💖`;
+
+            const encodedText = encodeURIComponent(text);
+            window.open(`https://wa.me/${phone}?text=${encodedText}`, '_blank');
+        }
+    </script>
+</body>
+</html>
